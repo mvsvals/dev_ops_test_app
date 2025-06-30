@@ -1,0 +1,25 @@
+services:
+  web:
+    image: copy123aweq/bgapp-web
+    deploy:
+      replicas: 5
+    ports:
+      - 8080:80
+    volumes:
+      - "/home/vagrant/dev_ops_test_app:/var/www/html"
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    image: copy123aweq/bgapp-db
+    networks:
+      - app-network
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    secrets:
+      - db_root_password
+
+networks:
+  app-network:
