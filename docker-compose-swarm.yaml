@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - "/home/vagrant/dev_ops_test_app:/var/www/html"
+      - "/home/vagrant/dev_ops_test_app/web:/var/www/html"
     networks:
       - app-network
 
