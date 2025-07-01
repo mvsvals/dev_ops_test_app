@@ -1,8 +1,6 @@
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile.web
+    image: copy123aweq/bgapp-web
     deploy:
       replicas: 3
       restart_policy:
@@ -15,9 +13,7 @@ services:
       - app-network
 
   db:
-    build:
-      context: .
-      dockerfile: Dockerfile.db
+    image: copy123aweq/bgapp-db
     networks:
       - app-network
     environment:
