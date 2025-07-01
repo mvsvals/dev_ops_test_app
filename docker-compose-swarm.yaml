@@ -1,25 +1,27 @@
 services:
   web:
-    image: copy123aweq/bgapp-web
+    build:
+      context: .
+      dockerfile: Dockerfile.web
     deploy:
-      replicas: 5
+      replicas: 3
+      restart_policy:
+        condition: on-failure
     ports:
       - 8080:80
     volumes:
       - "/home/vagrant/dev_ops_test_app:/var/www/html"
     networks:
       - app-network
-    depends_on:
-      - db
 
   db:
-    image: copy123aweq/bgapp-db
+    build:
+      context: .
+      dockerfile: Dockerfile.db
     networks:
       - app-network
     environment:
-      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
-    secrets:
-      - db_root_password
+      MYSQL_ROOT_PASSWORD: Password1
 
 networks:
   app-network:
